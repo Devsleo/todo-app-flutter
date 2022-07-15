@@ -30,8 +30,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.only(bottom: 80),
+      body: Container(
+        color: Colors.white,
+        height: MediaQuery.of(context).size.height - 150,
         child: PageView(
           controller: _pageController,
           onPageChanged: (index) {
@@ -40,19 +41,19 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           children: [
             buildPage(
                 color: Colors.white,
-                image: "assets/category.png",
+                image: "assets/create.png",
                 title: "Create your own Schedule",
                 subtitle:
-                    "Increase your productivity by managing your personal task and do them based on the highest priority"),
+                    "Get your todos created in one tap, no complicated work is required"),
             buildPage(
                 color: Colors.white,
                 image: "assets/category.png",
                 title: "Categorise your schedule",
                 subtitle:
-                    "Increase your productivity by managing your personal task and do them based on the highest priority"),
+                    "Organizing your todos to different categories helps you focus more on  important tasks. "),
             buildPage(
                 color: Colors.white,
-                image: "assets/category.png",
+                image: "assets/manage.png",
                 title: "Manage and priotize your task easily",
                 subtitle:
                     "Increase your productivity by managing your personal task and do them based on the highest priority"),
@@ -61,45 +62,80 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       ),
       bottomSheet: isLastPage
           ? Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: TextButton(
-                  style: TextButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5)),
-                      primary: Colors.white,
-                      backgroundColor: Colors.blue.shade800,
-                      minimumSize: Size.fromHeight(60)),
-                  onPressed: () async {
-                    final prefs = await SharedPreferences.getInstance();
-                    await prefs.setBool('showHome', true);
-
-                    Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => HomeScreen()));
-                  },
-                  child: Text("Get Started")),
-            )
-          : Container(
-              height: 80,
-              child: Center(
-                  child: Column(
-                children: [
-                  Center(
-                    child: SmoothPageIndicator(
-                      controller: _pageController,
-                      count: 3,
-                      onDotClicked: (index) => _pageController.animateToPage(
-                          index,
-                          duration: Duration(milliseconds: 500),
-                          curve: Curves.easeInOut),
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: Container(
+                color: Colors.white,
+                height: 150,
+                child: Column(
+                  children: [
+                    Center(
+                      child: SmoothPageIndicator(
+                        controller: _pageController,
+                        count: 3,
+                        onDotClicked: (index) => _pageController.animateToPage(
+                            index,
+                            duration: Duration(milliseconds: 500),
+                            curve: Curves.easeInOut),
+                      ),
                     ),
-                  ),
-                  TextButton(
-                      onPressed: () => _pageController.nextPage(
-                          duration: Duration(milliseconds: 500),
-                          curve: Curves.easeInOut),
-                      child: Text("Next"))
-                ],
-              )),
+                    SizedBox(
+                      height: 50,
+                    ),
+                    TextButton(
+                        style: TextButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5)),
+                            primary: Colors.white,
+                            backgroundColor: Colors.blue.shade800,
+                            minimumSize: Size.fromHeight(60)),
+                        onPressed: () async {
+                          final prefs = await SharedPreferences.getInstance();
+                          await prefs.setBool('showHome', true);
+
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (context) => HomeScreen()));
+                        },
+                        child: Text("Get Started")),
+                  ],
+                ),
+              ),
+            )
+          : Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: Container(
+                color: Colors.white,
+                height: 150,
+                child: Center(
+                    child: Column(
+                  children: [
+                    Center(
+                      child: SmoothPageIndicator(
+                        controller: _pageController,
+                        count: 3,
+                        onDotClicked: (index) => _pageController.animateToPage(
+                            index,
+                            duration: Duration(milliseconds: 500),
+                            curve: Curves.easeInOut),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 50,
+                    ),
+                    TextButton(
+                        style: TextButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5)),
+                            primary: Colors.white,
+                            backgroundColor: Colors.blue.shade800,
+                            minimumSize: Size.fromHeight(60)),
+                        onPressed: () => _pageController.nextPage(
+                            duration: Duration(milliseconds: 500),
+                            curve: Curves.easeInOut),
+                        child: Text("Next"))
+                  ],
+                )),
+              ),
             ),
     );
   }
@@ -111,27 +147,40 @@ Widget buildPage(
     required String title,
     required String subtitle}) {
   return Padding(
-    padding: const EdgeInsets.only(top: 50),
+    padding: const EdgeInsets.only(top: 100),
     child: Container(
       color: color,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 30),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset(image),
+            Image.asset(
+              image,
+              height: 250,
+              width: 250,
+              //fit: BoxFit.cover,
+            ),
             SizedBox(
-              height: 32,
+              height: 50,
             ),
             Center(
               child: Text(
                 "$title",
-                style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 34, fontWeight: FontWeight.bold),
               ),
             ),
             SizedBox(
               height: 24,
             ),
-            Center(child: Text("$subtitle"))
+            Center(
+                child: Text(
+              "$subtitle",
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 17, fontWeight: FontWeight.w400),
+            ))
           ],
         ),
       ),
