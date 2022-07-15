@@ -1,19 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/Screens/homeScreen.dart';
 import 'package:todo_app/Screens/onboarding.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const MyApp());
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final prefs = await SharedPreferences.getInstance();
+  //await prefs.setBool('showHome', false);
+  final showHome = prefs.getBool('showHome') ?? false;
+  runApp(MyApp(
+    showHome: showHome,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final bool showHome;
+  const MyApp({Key? key, required this.showHome}) : super(key: key);
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const OnBoardingScreen(),
+      home: showHome ? HomeScreen() : OnBoardingScreen(),
     );
   }
 }
@@ -42,3 +50,8 @@ class MyApp extends StatelessWidget {
 
 // //DONE! Now go back to the github url and refresh the page
 
+// -Steps For Updating Your Repository
+// git init 
+// git add .
+// git commit -m "Done with onboarding screen"
+// git push -u origin master
