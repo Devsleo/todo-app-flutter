@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/Constants/ThemeData.dart';
 import 'package:todo_app/Screens/homeScreen.dart';
 import 'package:todo_app/Screens/onboarding.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -6,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
-  //await prefs.setBool('showHome', false);
+  await prefs.setBool('showHome', false);
   final showHome = prefs.getBool('showHome') ?? false;
   runApp(MyApp(
     showHome: showHome,
@@ -21,6 +22,23 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: MyTheme.myDefaultTheme,
+      // theme: ThemeData(
+      //   // Define the default brightness and colors.
+      //   brightness: Brightness.dark,
+      //   primaryColor: Colors.lightBlue[800],
+
+      //   // Define the default font family.
+      //   fontFamily: 'Georgia',
+
+      //   // Define the default `TextTheme`. Use this to specify the default
+      //   // text styling for headlines, titles, bodies of text, and more.
+      //   textTheme: const TextTheme(
+      //     headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+      //     headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+      //     bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+      //   ),
+      // ),
       home: showHome ? HomeScreen() : OnBoardingScreen(),
     );
   }

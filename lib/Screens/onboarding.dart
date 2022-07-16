@@ -2,6 +2,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_app/Screens/homeScreen.dart';
+import 'package:todo_app/Screens/login.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({Key? key}) : super(key: key);
@@ -32,7 +33,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     return Scaffold(
       body: Container(
         color: Colors.white,
-        height: MediaQuery.of(context).size.height - 150,
+        //height: MediaQuery.of(context).size.height - 130,
         child: PageView(
           controller: _pageController,
           onPageChanged: (index) {
@@ -94,7 +95,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
                           Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
-                                  builder: (context) => HomeScreen()));
+                                  builder: (context) => LoginScreen()));
                         },
                         child: Text("Get Started")),
                   ],
@@ -153,17 +154,17 @@ Widget buildPage(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset(
               image,
-              height: 250,
+              height: 230,
               width: 250,
               //fit: BoxFit.cover,
             ),
             SizedBox(
-              height: 50,
+              height: 40,
             ),
             Center(
               child: Text(
