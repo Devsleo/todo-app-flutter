@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/Constants/ThemeData.dart';
-import 'package:todo_app/Screens/homeScreen.dart';
+//import 'package:todo_app/Constants/ThemeData.dart';
+import 'package:todo_app/Screens/homescreen.dart';
 import 'package:todo_app/Screens/onboarding.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,8 +22,20 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: MyTheme.myDefaultTheme,
+    return ScreenUtilInit(
+        designSize: const Size(375, 812),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (context, child) {
+          return MaterialApp(
+            // theme: MyTheme.myDefaultTheme,
+            home: showHome ? HomeScreen() : OnBoardingScreen(),
+          );
+        });
+  }
+}
+
+
       // theme: ThemeData(
       //   // Define the default brightness and colors.
       //   brightness: Brightness.dark,
@@ -39,12 +52,6 @@ class MyApp extends StatelessWidget {
       //     bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
       //   ),
       // ),
-      home: showHome ? HomeScreen() : OnBoardingScreen(),
-    );
-  }
-}
-
-
 //https://github.com/KInglyleo/todo-app-flutter
 
 // -Windows Terminal Commands //Do this If it is your first time pushing to github on your laptop

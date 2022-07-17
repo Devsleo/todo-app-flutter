@@ -1,8 +1,10 @@
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
-import 'package:todo_app/Screens/homeScreen.dart';
+import 'package:todo_app/Constants/color.dart';
+import 'package:todo_app/Screens/homescreen.dart';
 import 'package:todo_app/Screens/login.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({Key? key}) : super(key: key);
@@ -32,8 +34,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.white,
-        //height: MediaQuery.of(context).size.height - 130,
+        color: Constants.PrimaryColorLight,
         child: PageView(
           controller: _pageController,
           onPageChanged: (index) {
@@ -41,19 +42,19 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           },
           children: [
             buildPage(
-                color: Colors.white,
+                color: Constants.PrimaryColorLight,
                 image: "assets/create.png",
                 title: "Create your own Schedule",
                 subtitle:
                     "Get your todos created in one tap, no complicated work is required"),
             buildPage(
-                color: Colors.white,
+                color: Constants.PrimaryColorLight,
                 image: "assets/category.png",
                 title: "Categorise your schedule",
                 subtitle:
                     "Organizing your todos to different categories helps you focus more on  important tasks. "),
             buildPage(
-                color: Colors.white,
+                color: Constants.PrimaryColorLight,
                 image: "assets/manage.png",
                 title: "Manage and priotize your task easily",
                 subtitle:
@@ -63,10 +64,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       ),
       bottomSheet: isLastPage
           ? Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: Container(
-                color: Colors.white,
-                height: 150,
+                color: Constants.PrimaryColorLight,
+                height: 178.h,
                 child: Column(
                   children: [
                     Center(
@@ -80,15 +81,15 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       ),
                     ),
                     SizedBox(
-                      height: 50,
+                      height: 80.h,
                     ),
                     TextButton(
                         style: TextButton.styleFrom(
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5)),
-                            primary: Colors.white,
-                            backgroundColor: Colors.blue.shade800,
-                            minimumSize: Size.fromHeight(60)),
+                                borderRadius: BorderRadius.circular(10.r)),
+                            primary: Constants.TextColorLight,
+                            backgroundColor: Constants.PrimaryColorDark,
+                            minimumSize: Size.fromHeight(67.h)),
                         onPressed: () async {
                           final prefs = await SharedPreferences.getInstance();
                           await prefs.setBool('showHome', true);
@@ -103,12 +104,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               ),
             )
           : Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: Container(
-                color: Colors.white,
-                height: 150,
-                child: Center(
-                    child: Column(
+                color: Constants.PrimaryColorLight,
+                height: 178.h,
+                child: Column(
                   children: [
                     Center(
                       child: SmoothPageIndicator(
@@ -121,21 +121,21 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       ),
                     ),
                     SizedBox(
-                      height: 50,
+                      height: 80.h,
                     ),
                     TextButton(
                         style: TextButton.styleFrom(
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5)),
-                            primary: Colors.white,
-                            backgroundColor: Colors.blue.shade800,
-                            minimumSize: Size.fromHeight(60)),
+                                borderRadius: BorderRadius.circular(10.r)),
+                            primary: Constants.TextColorLight,
+                            backgroundColor: Constants.PrimaryColorDark,
+                            minimumSize: Size.fromHeight(67.h)),
                         onPressed: () => _pageController.nextPage(
                             duration: Duration(milliseconds: 500),
                             curve: Curves.easeInOut),
                         child: Text("Next"))
                   ],
-                )),
+                ),
               ),
             ),
     );
@@ -147,42 +147,45 @@ Widget buildPage(
     required String image,
     required String title,
     required String subtitle}) {
-  return Padding(
-    padding: const EdgeInsets.only(top: 100),
-    child: Container(
-      color: color,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Image.asset(
-              image,
-              height: 230,
-              width: 250,
-              //fit: BoxFit.cover,
-            ),
-            SizedBox(
-              height: 40,
-            ),
-            Center(
-              child: Text(
-                "$title",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 34, fontWeight: FontWeight.bold),
+  return SafeArea(
+    child: Padding(
+      padding: EdgeInsets.only(top: 74.h),
+      child: Container(
+        color: color,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.asset(
+                image,
+                height: 276.54.h,
+                width: 295.17.h,
+                //fit: BoxFit.cover,
               ),
-            ),
-            SizedBox(
-              height: 24,
-            ),
-            Center(
+              SizedBox(
+                height: 32.46.h,
+              ),
+              Center(
                 child: Text(
-              "$subtitle",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 17, fontWeight: FontWeight.w400),
-            ))
-          ],
+                  "$title",
+                  textAlign: TextAlign.center,
+                  style:
+                      TextStyle(fontSize: 28.sp, fontWeight: FontWeight.w600),
+                ),
+              ),
+              SizedBox(
+                height: 34.h,
+              ),
+              Center(
+                  child: Text(
+                "$subtitle",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.w500),
+              ))
+            ],
+          ),
         ),
       ),
     ),

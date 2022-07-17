@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/Constants/color.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -11,8 +12,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(backgroundColor: Constants.PrimaryColorDark),
       appBar: AppBar(
-        title: Text("Todo"),
+        actions: [Icon(Icons.more_vert)],
       ),
       body: Center(
         child: Container(
