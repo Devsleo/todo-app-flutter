@@ -4,9 +4,10 @@ import 'package:todo_app/Screens/homescreen.dart';
 import 'package:todo_app/Screens/onboarding.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:firebase_core';
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.ini
   final prefs = await SharedPreferences.getInstance();
   await prefs.setBool('showHome', false);
   final showHome = prefs.getBool('showHome') ?? false;
